@@ -3,37 +3,41 @@
 **Estudiante:** Asunción María Ayelén  
 **Tecnicatura:** Desarrollo de Software — IFTS N.° 29
 
-**Enlace de Producción:** https://<TU_DEPLOY_VERCEL>.vercel.app
+**Enlace de Producción:** 🌐 [pfo-2-kappa.vercel.app](https://pfo-2-kappa.vercel.app/)
 
 ## Descripción del Proyecto
 
 KHAYEN es una marca de ropa de diseño de autor de Misiones, Argentina, basado en sustentabilidad textil, upcycling y tintes naturales de descarte como palta y uva. Esta práctica formativa exploró cómo diferentes agentes de IA interpretaban directivas como la asimetría, bloques de color pleno y animaciones fluidas no lineales sin perder usabilidad.
 
-La propuesta visual se construyó sobre una paleta específica que refieren a los colores de la marca: Verde Selvática #B4C136, Ocre Mostaza #D8B837 y Terracota #BE5941.
+La propuesta visual se construyó rigurosamente sobre los tonos identitarios de la marca:
+* 🟢 **Verde Selvática:** `#B4C136`
+* 🟡 **Ocre Mostaza:** `#D8B837`
+* 🟤 **Terracota (Tierra Colorada):** `#BE5941`
 
-## Arquitectura del Repositorio
+El proyecto se estructuró de forma limpia para albergar los diferentes experimentos de maquetación:
 
-- `index.html`
-- `prompt.html`
-- `assets`
-- `agente-1/`
-  - `khayen-landing.html`
-- `agente-2/`
-  - `khayen.html`
-- `agente-3/`
-  - `index.html`
+```text
+- index.html
+- prompt.html
+- assets/
+- agente-1/
+  - khayen-landing.html
+- agente-2/
+  - khayen.html
+- agente-3/
+  - index.html
 
-## Objetivo de la Práctica
+## 🎯Objetivo de la Práctica
 
 El objetivo principal fue testear cómo distintos agentes de IA generan soluciones visuales y de interacción ante un prompt de alta precisión que solicitaba:
 
 - identidad sustentable y de upcycling,
 - una estética asimétrica y disruptiva,
-- bloques de color pleno con la paleta KHAYEN,
+- bloques de color pleno con la paleta KHAYEN, para romper con la monotonía
 - animaciones orgánicas y fluidas,
 - preservación de usabilidad y accesibilidad.
 
-## Capturas de Pantalla
+## 📸Capturas de Pantalla
 
 - Portada Principal
 <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start">
@@ -61,14 +65,14 @@ El objetivo principal fue testear cómo distintos agentes de IA generan solucion
   <img src="assets/screenshot-3.png" alt="Landing Agente Claude 3.5 Sonnet" width="450" style="display:inline-block;border:1px solid #ddd;padding:4px">
 </div>
 
-## Prompt Exacto Utilizado
-```
+## ⚡Prompt Exacto Utilizado
+```text
 #Identidad
 No sos un desarrollador corporativo tradicional. Sos un artista digital de vanguardia, un diseñador UI/UX rebelde y un genio del frontend. Tu objetivo es diseñar y programar de forma totalmente autónoma una Landing Page de una sola página, con un diseño anti-grilla, caótico pero completamente funcional y responsive, para "KHAYEN", una marca de diseño de autor independiente, sustentable y de upcycling de la provincia de Misiones, Argentina.
 
 #Instrucciones y Anarquía Visual (Con Escala Tipográfica Coherente)
 
-Abandoná por completo los estándares web aburridos y las plantillas corporativas chatas. Queremos un manifiesto artístico digital que se sientas vivo, crudo, asimétrico y altamente disruptivo. Jugá con elementos que se superpongan, capas fluidas, márgenes negativos y espaciados inesperados. ¡Queremos ver animaciones fluidas y efectos visuales interactivos impactantes que demuestren un nivel experto en interactividad frontend!
+Abandoná por completo los estándares web aburridos y las plantillas corporativas chatas. Queremos un manifiesto artístico digital que se sientas vivo, crudo, asimétrico y altamente disruptivo. Jugá con elements que se superpongan, capas fluidas, márgenes negativos y espaciados inesperados. ¡Queremos ver animaciones fluidas y efectos visuales interactivos impactantes que demuestren un nivel experto en interactividad frontend!
 
 * Regla de Oro Tipográfica: Ser disruptivo no significa usar letras gigantescas que rompan la usabilidad. Queda estrictamente prohibido utilizar tamaños de letra desproporcionados o enormes que ocupen toda la pantalla de forma invasiva. La tipografía debe mantener una escala estética, equilibrada y perfectamente acorde a cada sección y al tema de la marca, garantizando una excelente legibilidad en todo momento.
 
@@ -127,17 +131,15 @@ Requisitos Estructurales Estrictos (Debes incluir estas secciones obligatorias e
 
 * Queda terminantemente prohibido dejar cuadros vacíos con texto instructivo, cajas grises o atributos `src=""` en blanco. 
 * Para las secciones que requieran imágenes (como el Hero o Flores de Misiones), debes buscar e incrustar enlaces reales, activos y de alta calidad desde bancos de imágenes en línea (como Unsplash) que vayan 100% acordes al tema (palabras clave: "avant-garde deconstructed fabrics", "brutalist raw linen texture", "fashion upcycling workshop", "dark tropical jungle botany").
-* REGLA DE REMOCIÓN: Si en alguna sección decides no utilizar una imagen en línea o no encuentras una URL funcional acorde al tema, NO debes crear un contenedor o `
-` vacío para la foto. En su lugar, elimina ese bloque por completo y trabaja la maquetación utilizando texto pesado e iconos vectoriales SVG nativos y estilizados para dar soporte visual y textura al diseño.
+* REGLA DE REMOCIÓN: Si en alguna sección decides no utilizar una imagen en línea o no encuentras una URL funcional acorde al tema, NO debes crear un contenedor o `<div>` vacío para la foto. En su lugar, elimina ese bloque por completo y trabaja la maquetación utilizando texto pesado e iconos vectoriales SVG nativos y estilizados para dar soporte visual y textura al diseño.
 
 #Restricciones Técnicas, Animaciones y Adaptabilidad
 
 * Escribir código HTML5 semántico y CSS moderno, fluido y disruptivo en bloques limpios.
 * Control del tamaño tipográfico: Utilizar unidades relativas configuradas con criterio (como `rem` o `em`) para asegurar que los encabezados (`h1`, `h2`, `h3`) mantengan proporciones profesionales y balanceadas tanto en monitores de escritorio como en pantallas móviles.
 * Animaciones y Efectos Copados: Implementa transiciones suaves de entrada (fade-in), efectos de desplazamiento interactivos y estados `hover` de CSS ultra potentes. Las tarjetas de los testimonios y los bloques de servicios deben enderezarse, deslizarse, mutar su gradiente de fondo o encender un resplandor radial de color coincidente de forma orgánica cuando el mouse pase sobre ellos.
-* Responsividad Estricta: Configurar los breakpoints de Media Queries necesarios para asegurar que este diseño se adapte de forma orgánica, estilizada y perfectamente legible en pantallas de Escritorio, Tablets y Celulares, manejando el menú hamburguesa de manera impecable.
+* Responsividad Estricta: Configurar los breakpoints de Media Queries necesarios para asegurar que este diseño se adapte de forma orgánica, estilizada y perfectly legible en pantallas de Escritorio, Tablets y Celulares, manejando el menú hamburguesa de manera impecable.
 * Entregar el código frontend completo, unificado y listo para producción sin necesidad de correcciones manuales.
-```
 
 
 ## Conclusiones y Experiencia Crítica
@@ -149,4 +151,4 @@ Requisitos Estructurales Estrictos (Debes incluir estas secciones obligatorias e
 
 ## Créditos de IA
 
-Este README y la formulación de prompts de alta precisión se desarrollaron con la colaboración estratégica de Gemini como Inteligencia Artificial de asistencia. Todo el contenido fue verificado y adaptado manualmente para ajustarse a los criterios académicos y a la visión del proyecto.
+Este archivo README.md y las iteraciones aplicadas para lograr un prompt contaron con la colaboración estratégica de Gemini en rol de asistente de IA. Todo el contenido generado fue revisado, curado y adaptado manualmente para garantizar la fidelidad absoluta con los objetivos de la cátedra.
