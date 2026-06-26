@@ -1,18 +1,26 @@
-# Práctica Formativa Obligatoria 2 - Prompt Engineering en Agentes de IA
+# 🧪 Práctica Formativa Obligatoria 2 - Prompt Engineering en Agentes de IA
 
 **Estudiante:** Asunción María Ayelén  
-**Tecnicatura:** Desarrollo de Software — IFTS N.° 29
-
+**Tecnicatura:** Desarrollo de Software — IFTS N.° 29  
 **Enlace de Producción:** 🌐 [pfo-2-kappa.vercel.app](https://pfo-2-kappa.vercel.app/)
 
-## Descripción del Proyecto
+---
 
-KHAYEN es una marca de ropa de diseño de autor de Misiones, Argentina, basado en sustentabilidad textil, upcycling y tintes naturales de descarte como palta y uva. Esta práctica formativa exploró cómo diferentes agentes de IA interpretaban directivas como la asimetría, bloques de color pleno y animaciones fluidas no lineales sin perder usabilidad.
+## 🌿 Descripción del Proyecto
 
+**KHAYEN** es una marca de ropa de diseño de autor de Misiones, Argentina, basada en la sustentabilidad textil, el upcycling y el uso de tintes naturales de descarte orgánico (como palta y uva). 
+
+Esta práctica formativa exploró cómo diferentes agentes de IA interpretaban directivas complejas como la asimetría, los bloques de color pleno y las animaciones fluidas no lineales, sin perder en ningún momento la usabilidad ni la accesibilidad web.
+
+### 🎨 Paleta Cromática Oficial
 La propuesta visual se construyó rigurosamente sobre los tonos identitarios de la marca:
 * 🟢 **Verde Selvática:** `#B4C136`
 * 🟡 **Ocre Mostaza:** `#D8B837`
 * 🟤 **Terracota (Tierra Colorada):** `#BE5941`
+
+---
+
+## 🏗️ Arquitectura del Repositorio
 
 El proyecto se estructuró de forma limpia para albergar los diferentes experimentos de maquetación:
 
@@ -27,6 +35,8 @@ El proyecto se estructuró de forma limpia para albergar los diferentes experime
 - agente-3/
   - index.html
 
+---
+
 ## 🎯Objetivo de la Práctica
 
 El objetivo principal fue testear cómo distintos agentes de IA generan soluciones visuales y de interacción ante un prompt de alta precisión que solicitaba:
@@ -36,6 +46,8 @@ El objetivo principal fue testear cómo distintos agentes de IA generan solucion
 - bloques de color pleno con la paleta KHAYEN, para romper con la monotonía
 - animaciones orgánicas y fluidas,
 - preservación de usabilidad y accesibilidad.
+
+---
 
 ## 📸Capturas de Pantalla
 
@@ -64,6 +76,8 @@ El objetivo principal fue testear cómo distintos agentes de IA generan solucion
 <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start">
   <img src="assets/screenshot-3.png" alt="Landing Agente Claude 3.5 Sonnet" width="450" style="display:inline-block;border:1px solid #ddd;padding:4px">
 </div>
+
+---
 
 ## ⚡Prompt Exacto Utilizado
 ```text
@@ -141,6 +155,7 @@ Requisitos Estructurales Estrictos (Debes incluir estas secciones obligatorias e
 * Responsividad Estricta: Configurar los breakpoints de Media Queries necesarios para asegurar que este diseño se adapte de forma orgánica, estilizada y perfectly legible en pantallas de Escritorio, Tablets y Celulares, manejando el menú hamburguesa de manera impecable.
 * Entregar el código frontend completo, unificado y listo para producción sin necesidad de correcciones manuales.
 
+---
 
 ## Conclusiones y Experiencia Crítica
 
@@ -148,6 +163,8 @@ Requisitos Estructurales Estrictos (Debes incluir estas secciones obligatorias e
 - **El Reto de la Disrupción:** La experiencia demostró que plasmar conceptos abstractos y fuertemente vanguardistas (como el "brutalismo", la "anarquía visual" o "disrupción") representa un desafío para los modelos de lenguaje. Al no rigidizar el prompt con maquetados estructurados o gustos hiper-específicos, se buscó intencionalmente que cada IA explorara su propia libertad creativa en las animaciones y la composición. Si bien un prompt más cerrado hubiera clonado un diseño exacto, el dejarlo abierto permitió auditar el "criterio" estético autónomo de cada herramienta.
 - **Resultados Diversos:** El balance final fue sumamente positivo y enriquecedor: se obtuvieron tres interfaces con propuestas visuales y lógicas completamente diferentes entre sí. Lograr esa diversidad de identidades partiendo de una misma base conceptual era el gran objetivo de esta investigación.
 - **Viabilidad Técnica:** El proceso concluyó con éxito en una estructura web estática, optimizada y perfectamente lista para un despliegue unificado y eficiente en la plataforma Vercel.
+
+---
 
 ## Créditos de IA
 
