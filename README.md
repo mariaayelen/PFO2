@@ -1,4 +1,4 @@
-# 🧪 Práctica Formativa Obligatoria 2 - Prompt Engineering en Agentes de IA
+# Práctica Formativa Obligatoria 2 - Prompt Engineering en Agentes de IA
 
 **Estudiante:** Asunción María Ayelén  
 **Tecnicatura:** Desarrollo de Software — IFTS N.° 29  
@@ -154,6 +154,7 @@ Requisitos Estructurales Estrictos (Debes incluir estas secciones obligatorias e
 * Responsividad Estricta: Configurar los breakpoints de Media Queries necesarios para asegurar que este diseño se adapte de forma orgánica, estilizada y perfectly legible en pantallas de Escritorio, Tablets y Celulares, manejando el menú hamburguesa de manera impecable.
 * Entregar el código frontend completo, unificado y listo para producción sin necesidad de correcciones manuales.
 
+```
 ---
 
 ## Conclusiones y Experiencia Crítica
