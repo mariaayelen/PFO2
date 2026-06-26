@@ -62,10 +62,10 @@ El objetivo principal fue testear cómo distintos agentes de IA generan solucion
 </div>
 
 ## Prompt Exacto Utilizado
-A-Identidad
+```#Identidad
 No sos un desarrollador corporativo tradicional. Sos un artista digital de vanguardia, un diseñador UI/UX rebelde y un genio del frontend. Tu objetivo es diseñar y programar de forma totalmente autónoma una Landing Page de una sola página, con un diseño anti-grilla, caótico pero completamente funcional y responsive, para "KHAYEN", una marca de diseño de autor independiente, sustentable y de upcycling de la provincia de Misiones, Argentina.
 
-B-Instrucciones y Anarquía Visual (Con Escala Tipográfica Coherente)
+#Instrucciones y Anarquía Visual (Con Escala Tipográfica Coherente)
 
 Abandoná por completo los estándares web aburridos y las plantillas corporativas chatas. Queremos un manifiesto artístico digital que se sientas vivo, crudo, asimétrico y altamente disruptivo. Jugá con elementos que se superpongan, capas fluidas, márgenes negativos y espaciados inesperados. ¡Queremos ver animaciones fluidas y efectos visuales interactivos impactantes que demuestren un nivel experto en interactividad frontend!
 
@@ -113,7 +113,7 @@ Requisitos Estructurales Estrictos (Debes incluir estas secciones obligatorias e
    - Diseño minimalista y crudo.
    - Nota de copyright corporativo y enlaces activos a redes sociales incluyendo iconos vectoriales SVG nativos y estilizados para Instagram y Facebook que reaccionen al hover.
 
-C-Contexto Cromático, Texturas y Color Pleno
+#Contexto Cromático, Texturas y Color Pleno
 
 * Política de Bloques de Color (Crucial): Queda prohibido hacer una página monótona que sea 100% negra de punta a punta. Debes diseñar secciones específicas (como "Sobre Nosotros" o "Laboratorio Sustentable") donde predominen absolutamente los colores de la marca como fondos plenos o gradientes masivos y pesados, rompiendo la oscuridad y generando un ritmo visual de alto contraste.
 * Paleta Oficial de la Marca:
@@ -122,20 +122,20 @@ C-Contexto Cromático, Texturas y Color Pleno
   - Terracota / Tierra Colorada de Misiones: #BE5941
   Usa estos tonos para generar sombras de fondo, bloques de color vibrantes, bordes rústicos y efectos de iluminación neon que reaccionen a las interacciones del usuario.
 
-D-Política de Imágenes e Iconos Estricta
+#Política de Imágenes e Iconos Estricta
 
 * Queda terminantemente prohibido dejar cuadros vacíos con texto instructivo, cajas grises o atributos `src=""` en blanco. 
 * Para las secciones que requieran imágenes (como el Hero o Flores de Misiones), debes buscar e incrustar enlaces reales, activos y de alta calidad desde bancos de imágenes en línea (como Unsplash) que vayan 100% acordes al tema (palabras clave: "avant-garde deconstructed fabrics", "brutalist raw linen texture", "fashion upcycling workshop", "dark tropical jungle botany").
 * REGLA DE REMOCIÓN: Si en alguna sección decides no utilizar una imagen en línea o no encuentras una URL funcional acorde al tema, NO debes crear un contenedor o `
 ` vacío para la foto. En su lugar, elimina ese bloque por completo y trabaja la maquetación utilizando texto pesado e iconos vectoriales SVG nativos y estilizados para dar soporte visual y textura al diseño.
 
-E-Restricciones Técnicas, Animaciones y Adaptabilidad
+#Restricciones Técnicas, Animaciones y Adaptabilidad
 
 * Escribir código HTML5 semántico y CSS moderno, fluido y disruptivo en bloques limpios.
 * Control del tamaño tipográfico: Utilizar unidades relativas configuradas con criterio (como `rem` o `em`) para asegurar que los encabezados (`h1`, `h2`, `h3`) mantengan proporciones profesionales y balanceadas tanto en monitores de escritorio como en pantallas móviles.
 * Animaciones y Efectos Copados: Implementa transiciones suaves de entrada (fade-in), efectos de desplazamiento interactivos y estados `hover` de CSS ultra potentes. Las tarjetas de los testimonios y los bloques de servicios deben enderezarse, deslizarse, mutar su gradiente de fondo o encender un resplandor radial de color coincidente de forma orgánica cuando el mouse pase sobre ellos.
 * Responsividad Estricta: Configurar los breakpoints de Media Queries necesarios para asegurar que este diseño se adapte de forma orgánica, estilizada y perfectamente legible en pantallas de Escritorio, Tablets y Celulares, manejando el menú hamburguesa de manera impecable.
-* Entregar el código frontend completo, unificado y listo para producción sin necesidad de correcciones manuales.
+* Entregar el código frontend completo, unificado y listo para producción sin necesidad de correcciones manuales.```
 
 
 ## Conclusiones y Experiencia Crítica
