@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KHAYEN | Especificación del Prompt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Syne:wght@800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #000000;
+            --brand-green: #B4C136;
+            --brand-ochre: #D8B837;
+            --brand-terracotta: #BE5941;
+            --text-white: #FFFFFF;
+            --text-muted: #888888;
+            --font-display: 'Syne', sans-serif;
+            --font-sans: 'Space Grotesk', sans-serif;
+        }
+
+        /* --- BARRA DE DESPLAZAMIENTO ESTILIZADA EN OCRE --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--brand-ochre);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f1ce42;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: radial-gradient(circle at 90% 10%, rgba(180, 193, 54, 0.05) 0%, transparent 50%), var(--bg-dark);
+            color: var(--text-white);
+            font-family: var(--font-sans);
+            padding: 4rem 3rem;
+            min-height: 100vh;
+        }
+
+        .container { max-width: 950px; margin: 0 auto; }
+
+        /* Botón de Retorno con interacción */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--brand-green);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            transition: transform 0.2s ease;
+        }
+        .back-btn:hover { transform: translateX(-5px); }
+
+        header {
+            border-left: 3px solid var(--brand-terracotta);
+            padding-left: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            font-size: 2.5rem;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        h1 span { color: var(--brand-terracotta); }
+        
+        p.desc { color: var(--text-muted); font-size: 1.1rem; }
+
+        /* Contenedor del Editor de Código Plano Completo */
+        .prompt-wrapper {
+            background-color: #060606;
+            border: 2px solid #111;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .prompt-header {
+            background-color: #0d0d11;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1a1a22;
+        }
+
+        .window-dots { display: flex; gap: 6px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background-color: #222; }
+        .dot.active { background-color: var(--brand-ochre); }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid rgba(216, 184, 55, 0.3);
+            color: var(--brand-ochre);
+            padding: 0.6rem 1.2rem;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        .copy-btn:hover {
+            background-color: var(--brand-ochre);
+            color: #000;
+        }
+
+        /* Bloque sin max-height para renderizar todo de corrido */
+        pre {
+            padding: 2.5rem;
+            overflow: visible; /* Elimina cualquier intento de scroll interno */
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #e0e0e0;
+        }
+
+        /* Marcadores visuales de secciones */
+        .hl-section { color: var(--brand-green); font-weight: bold; display: block; margin-top: 1rem; }
+        .hl-section:first-child { margin-top: 0; }
+        .hl-bullet { color: var(--brand-ochre); }
+        .hl-text { color: #ffffff; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">← Volver a la Portada</a>
+        
+        <header>
+            <h1>Especificación del <span>Prompt</span></h1>
+            <p class="desc">Ingeniería de instrucciones optimizada para la identidad de Khayén.</p>
+        </header>
+
+        <div class="prompt-wrapper">
+            <div class="prompt-header">
+                <div class="window-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <button class="copy-btn" id="copyBtn">Copiar Prompt</button>
+            </div>
+            
+            <pre id="promptText"><span class="hl-section"># Identidad</span>
+No sos un desarrollador corporativo tradicional. Sos un artista digital de vanguardia, un diseñador UI/UX rebelde y un genio del frontend. Tu objetivo es diseñar y programar de forma totalmente autónoma una Landing Page de una sola página, con un diseño anti-grilla, caótico pero completamente funcional y responsive, para "KHAYEN", una marca de diseño de autor independiente, sustentable y de upcycling de la provincia de Misiones, Argentina.
+
+<span class="hl-section"># Instrucciones y Anarquía Visual (Con Escala Tipográfica Coherente)</span>
+Abandoná por completo los estándares web aburridos y las plantillas corporativas chatas. Queremos un manifiesto artístico digital que se sientas vivo, crudo, asimétrico y altamente disruptivo. Jugá con elementos que se superpongan, capas fluidas, márgenes negativos y espaciados inesperados. ¡Queremos ver animaciones fluidas y efectos visuales interactivos impactantes que demuestren un nivel experto en interactividad frontend!
+
+<span class="hl-bullet">* Regla de Oro Tipográfica:</span> Ser disruptivo no significa usar letras gigantescas que rompan la usabilidad. Queda estrictamente prohibido utilizar tamaños de letra desproporcionados o enormes que ocupen toda la pantalla de forma invasiva. La tipografía debe mantener una escala estética, equilibrada y perfectamente acorde a cada sección y al tema de la marca, garantizando una excelente legibilidad en todo momento.
+
+<span class="hl-section">Requisitos Estructurales Estrictos (Debes incluir estas secciones obligatorias en este orden, pero con transiciones dinámicas y no lineales):</span>
+
+<span class="hl-bullet">1. Cabecera (Header con menú de navegación):</span>
+   - El nombre de la marca "KHAYEN" debe ser impactante, utilizando un estilo tipográfico brutalista y con personalidad mediante CSS puro, pero adaptado al espacio del menú.
+   - Los enlaces de navegación deben integrarse orgánicamente o colapsar estrictamente en un menú hamburguesa CSS de estilo cyberpunk/indie en dispositivos móviles y tablets.
+   - Incluir un placeholder limpio para el Favicon de la pestaña del navegador que combine con la identidad de la marca.
+
+<span class="hl-bullet">2. Hero Section (Sección principal):</span>
+   - Una apertura visual colosal a pantalla completa (100vh).
+   - Debe incluir un título impactante con efectos de texto o transiciones tipográficas fuertes (por ejemplo: "Texturas con memoria textil"), pero con un tamaño controlado y refinado que no desborde el contenedor.
+   - Una descripción cruda y conceptual de la marca.
+   - Un botón de llamada a la acción (CTA) experimental que se distorsione, cambie de gradiente o irradie un brillo de luz neón orgánico al pasar el mouse (hover).
+
+<span class="hl-bullet">3. Descripción / Sobre Nosotros (Identidad Khayén):</span>
+   - Una disposición completamente asimétrica donde las tarjetas de texto y contenedores se inclinen (usando `transform: rotate`), se superpongan o rompan la grilla tradicional.
+   - Debe incluir textualmente la historia oficial de la marca: <span class="hl-text">"KHAYEN nació oficialmente en abril de 2025 (I.N.P.I. Acta N° 4491655). Su nombre es una fusión de los nombres de las hijas de la creadora de la marca, con la intención de que ellas le den continuidad en el futuro. El concepto de KHAYEN se basa en la idea de dar nueva vida a retazos de tela, promoviendo el reciclaje y la reducción de desechos textiles. Busca colaboraciones con fábricas de ropa y proveedores de telas sobrantes o recicladas, y las combina también con telas compradas. Cada prenda contará una historia diferente, usando colores y patrones dispares, originando así colecciones disruptivas, atemporales y de bajo impacto ambiental."</span>
+
+<span class="hl-bullet">4. Laboratorio Sustentable (Nuestras Técnicas y Procesos):</span>
+   - Una sección dedicada 100% a la sustentabilidad y el diseño de autor. No uses maquetados rígidos de cajas alineadas; diseñá un lienzo interactivo donde los elementos se sientan suspendidos.
+   - Debe mostrar de forma artística mediante tarjetitas flotantes y asimétricas los siguientes conceptos clave, utilizando animaciones y efectos interactivos potentes para simular el movimiento:
+     * Técnicas de Patchwork (unión de fragmentos textiles).
+     * Recolección de desechos y sobrantes de fábricas textiles para mitigar el impacto ambiental.
+     * Tintes naturales experimentales extraídos de descartes orgánicos de Palta y Uva.
+   - REGLA DE IMÁGENES EN ESTA SECCIÓN: Queda prohibido usar fotos en esta sección específica. Todo el soporte visual y la textura de las tarjetitas flotantes se debe resolver con tipografía moderna, colores plenos e iconos vectoriales SVG nativos bien estilizados.
+
+<span class="hl-bullet">5. Lanzamientos destacados (Colección Flores de Misiones):</span>
+   - Espacio destacado para la nueva colección: <span class="hl-text">"Nueva colección inspirada en Flores de Misiones, realizada completamente a mano sobre bases de Lino, utilizando técnicas artesanales de estampado y foil metálico".</span>
+
+<span class="hl-bullet">6. Testimonios o Reseñas de clientes (Visiones Aliadas):</span>
+   - Una disposición esparcida y asimétrica (tipo nube caótica) que muestre exactamente cuatro (4) reseñas de clientes.
+   - Cada testimonio debe contar con su cita de texto rústica y una geometría abstracta o forma estilizada para el avatar del cliente.
+
+<span class="hl-bullet">7. Formulario de Contacto:</span>
+   - Maquetado visual impactante y brutalista, sin requerir funcionalidad backend.
+   - Debe ser fuertemente asimétrico u ocupar el ancho completo, con campos industriales (Nombre/Identidad, Email, Teléfono de contacto y Mensaje).
+   - Los inputs deben reaccionar agresivamente al hacer foco (focus), cambiando de color o irradiando sombras de luz.
+
+<span class="hl-bullet">8. Pie de Página (Footer):</span>
+   - Diseño minimalista y crudo.
+   - Nota de copyright corporativo y enlaces activos a redes sociales incluyendo iconos vectoriales SVG nativos y estilizados para Instagram y Facebook que reaccionen al hover.
+
+<span class="hl-section"># Contexto Cromático, Texturas y Color Pleno</span>
+<span class="hl-bullet">* Política de Bloques de Color (Crucial):</span> Queda prohibido hacer una página monótona que sea 100% negra de punta a punta. Debes diseñar secciones específicas (como "Sobre Nosotros" o "Laboratorio Sustentable") donde predominen absolutamente los colores de la marca como fondos plenos o gradientes masivos y pesados, rompiendo la oscuridad y generando un ritmo visual de alto contraste.
+<span class="hl-bullet">* Paleta Oficial de la Marca:</span>
+  - Verde Tierra Selvática: #B4C136
+  - Ocre/Mostaza Tóxico: #D8B837
+  - Terracota / Tierra Colorada de Misiones: #BE5941
+  Usa estos tonos para generar sombras de fondo, bloques de color vibrantes, bordes rústicos y efectos de iluminación neon que reaccionen a las interacciones del usuario.
+
+<span class="hl-section"># Política de Imágenes e Iconos Estricta</span>
+<span class="hl-bullet">*</span> Queda terminantemente prohibido dejar cuadros vacíos con texto instructivo, cajas grises o atributos `src=""` en blanco. 
+<span class="hl-bullet">*</span> Para las secciones que requieran imágenes (como el Hero o Flores de Misiones), debes buscar e incrustar enlaces reales, activos y de alta calidad desde bancos de imágenes en línea (como Unsplash) que vayan 100% acordes al tema (palabras clave: "avant-garde deconstructed fabrics", "brutalist raw linen texture", "fashion upcycling workshop", "dark tropical jungle botany").
+<span class="hl-bullet">* REGLA DE REMOCIÓN:</span> Si en alguna sección decides no utilizar una imagen en línea o no encuentras una URL funcional acorde al tema, NO debes crear un contenedor o `<div>` vacío para la foto. En su lugar, elimina ese bloque por completo y trabaja la maquetación utilizando texto pesado e iconos vectoriales SVG nativos y estilizados para dar soporte visual y textura al diseño.
+
+<span class="hl-section"># Restricciones Técnicas, Animaciones y Adaptabilidad</span>
+<span class="hl-bullet">*</span> Escribir código HTML5 semántico y CSS moderno, fluido y disruptivo en bloques limpios.
+<span class="hl-bullet">* Control del tamaño tipográfico:</span> Utilizar unidades relativas configuradas con criterio (como `rem` o `em`) para asegurar que los encabezados (`h1`, `h2`, `h3`) mantengan proporciones profesionales y balanceadas tanto en monitores de escritorio como en pantallas móviles.
+<span class="hl-bullet">* Animaciones y Efectos Copados:</span> Implementa transiciones suaves de entrada (fade-in), efectos de desplazamiento interactivos y estados `hover` de CSS ultra potentes. Las tarjetas de los testimonios y los bloques de servicios deben enderezarse, deslizarse, mutar su gradiente de fondo o encender un resplandor radial de color coincidente de forma orgánica cuando el mouse pase sobre ellos.
+<span class="hl-bullet">* Responsividad Estricta:</span> Configurar los breakpoints de Media Queries necesarios para asegurar que este diseño se adapte de forma orgánica, estilizada y perfectamente legible en pantallas de Escritorio, Tablets y Celulares, manejando el menú hamburguesa de manera impecable.
+<span class="hl-bullet">*</span> Entregar el código frontend completo, unificado y listo para producción sin necesidad de correcciones manuales.</pre>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            const textToCopy = document.getElementById('promptText').innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                this.innerText = '¡Copiado!';
+                this.style.borderColor = 'var(--brand-green)';
+                this.style.color = 'var(--brand-green)';
+                setTimeout(() => {
+                    this.innerText = 'Copiar Prompt';
+                    this.style.borderColor = 'rgba(216, 184, 55, 0.3)';
+                    this.style.color = 'var(--brand-ochre)';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

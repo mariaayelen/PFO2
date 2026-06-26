@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KHAYEN | Prompt Engineering en Agentes de IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Syne:wght@800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #000000;
+            --brand-green: #B4C136;
+            --brand-ochre: #D8B837;
+            --brand-terracotta: #BE5941;
+            --brand-gold: #E5A93C;
+            --text-white: #FFFFFF;
+            --text-muted: #555555;
+            --font-display: 'Syne', sans-serif;
+            --font-sans: 'Space Grotesk', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fondo vivo con un degradé de grano que simula la tierra misionera */
+        body {
+            background: radial-gradient(circle at 10% 20%, rgba(190, 89, 65, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(180, 193, 54, 0.08) 0%, transparent 40%),
+                        var(--bg-dark);
+            color: var(--text-white);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 4rem;
+            overflow-x: hidden;
+        }
+
+        /* Header de la portada unificado y más compacto */
+        header {
+            max-width: 900px;
+            text-align: left;
+            align-self: flex-start;
+        }
+
+        .badge-ifts {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--brand-green);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--brand-green);
+            padding-bottom: 5px;
+        }
+
+        .student-label {
+            font-size: 1.2rem;
+            color: var(--brand-ochre);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Letra más chica y controlada para que entre todo en la pantalla */
+        h1 {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1;
+            letter-spacing: -1px;
+            margin-bottom: 1.2rem;
+        }
+
+        h1 span {
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--text-white);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* CONTENEDOR ENLÍNEA COMPACTO PARA 4 TARJETAS */
+        .canvas-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin: auto 0; /* Centra el bloque verticalmente en el espacio disponible */
+            position: relative;
+            gap: 1.5rem;
+        }
+
+        /* Estilo base brutalista achicado para los accesos */
+        .card-link {
+            background-color: #060606;
+            border: 2px solid #111;
+            padding: 2rem 1.5rem;
+            text-decoration: none;
+            color: var(--text-white);
+            width: 24%;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+        }
+
+        /* Rotaciones sutiles fijas iniciales */
+        .card-1 { transform: rotate(-1deg); }
+        .card-2 { transform: rotate(1.5deg); }
+        .card-3 { transform: rotate(-0.5deg); }
+        .card-4 { transform: rotate(1deg); }
+
+        .card-number {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            line-height: 1;
+            text-align: right;
+            opacity: 0.15;
+            transition: opacity 0.3s;
+        }
+
+        .card-link h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+            margin-top: 0.5rem;
+        }
+
+        .card-link small {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--brand-ochre);
+            font-weight: 700;
+        }
+
+        /* --- EFECTOS INTERACTIVOS COMPLEMENTARIOS --- */
+        
+        /* Tarjeta 1: Prompt (Verde) */
+        .card-1:hover {
+            border-color: var(--brand-green);
+            transform: rotate(0deg) scale(1.03);
+            box-shadow: -8px 8px 0px var(--brand-green);
+            background-color: #020500;
+        }
+        .card-1:hover .card-number { color: var(--brand-green); opacity: 1; }
+
+        /* Tarjeta 2: Landing 1 - Codex (Terracota) */
+        .card-2:hover {
+            border-color: var(--brand-terracotta);
+            transform: rotate(0deg) scale(1.03);
+            box-shadow: 0px 8px 0px var(--brand-terracotta);
+            background-color: #050100;
+        }
+        .card-2:hover .card-number { color: var(--brand-terracotta); opacity: 1; }
+
+        /* Tarjeta 3: Landing 2 - Open Code (Ocre) */
+        .card-3:hover {
+            border-color: var(--brand-ochre);
+            transform: rotate(0deg) scale(1.03);
+            box-shadow: 8px 8px 0px var(--brand-ochre);
+            background-color: #050400;
+        }
+        .card-3:hover .card-number { color: var(--brand-ochre); opacity: 1; }
+
+        /* Tarjeta 4: Landing 3 - Claude (Oro) */
+        .card-4:hover {
+            border-color: var(--brand-gold);
+            transform: rotate(0deg) scale(1.03);
+            box-shadow: 8px -8px 0px var(--brand-gold);
+            background-color: #050300;
+        }
+        .card-4:hover .card-number { color: var(--brand-gold); opacity: 1; }
+
+        /* Footer minimalista cruzado abajo */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #111;
+            padding-top: 2rem;
+            font-size: 0.9rem;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Diseño responsivo para pantallas chicas */
+        @media (max-width: 1024px) {
+            .canvas-links { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 3rem 0; }
+            .card-link { width: 100%; min-height: 140px; transform: none !important; }
+        }
+
+        @media (max-width: 650px) {
+            body { padding: 2rem; }
+            h1 { font-size: 2.3rem; letter-spacing: -1px; }
+            .canvas-links { grid-template-columns: 1fr; gap: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="badge-ifts">IFTS N.° 29 • Tec. en Desarrollo de Software</div>
+        <div class="student-label">Estudiante: Asunción María Ayelén</div>
+        <h1>Prompt Engineering <span>en Agentes de IA</span></h1>
+        <div class="subtitle">Práctica Formativa Obligatoria 2</div>
+    </header>
+
+    <main class="canvas-links">
+        
+        <a href="prompt.html" class="card-link card-1">
+            <div class="card-number">01</div>
+            <div>
+                <h3>Prompt</h3>
+                <small>Especificación Técnica</small>
+            </div>
+        </a>
+
+        <a href="agente-1/khayen-landing.html" class="card-link card-2">
+            <div class="card-number">02</div>
+            <div>
+                <h3>Landing 1</h3>
+                <small>Agente: Codex • OpenAI</small>
+            </div>
+        </a>
+
+        <a href="agente-2/khayen.html" class="card-link card-3">
+            <div class="card-number">03</div>
+            <div>
+                <h3>Landing 2</h3>
+                <small>Agente: Open Code • Open Source Engine</small>
+            </div>
+        </a>
+
+        <a href="agente-3/index.html" class="card-link card-4">
+            <div class="card-number">04</div>
+            <div>
+                <h3>Landing 3</h3>
+                <small>Agente: Claude 3.5 Sonnet • Anthropic</small>
+            </div>
+        </a>
+
+    </main>
+
+    <footer>
+        <div>AYELEN ASUNCION © 2026</div>
+        <div>Desarrollo de Sistemas Web (Front End)</div>
+    </footer>
+
+</body>
+</html>

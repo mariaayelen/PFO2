@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KHAYEN — Diseño de Autor Sustentable · Misiones</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231A1009'/><text x='4' y='24' font-size='22' font-family='serif' fill='%23B4C136' font-weight='900'>K</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --verde: #B4C136;
+      --ocre: #D8B837;
+      --terra: #BE5941;
+      --negro: #1A1009;
+      --negro2: #0E0905;
+      --crema: #F5F0E8;
+      --crema2: #EDE6D6;
+      --gris: #3A3228;
+      --ff-display: 'Archivo Black', sans-serif;
+      --ff-body: 'Space Grotesk', sans-serif;
+      --ff-mono: 'Space Mono', monospace;
+    }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: var(--ff-body);
+      background: var(--negro);
+      color: var(--crema);
+      overflow-x: hidden;
+      cursor: default;
+    }
+    ::selection { background: var(--terra); color: var(--crema); }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--negro2); }
+    ::-webkit-scrollbar-thumb { background: var(--verde); border-radius: 0; }
+
+    /* ===== NOISE OVERLAY ===== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .4;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(14, 9, 5, 0.82);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(180, 193, 54, 0.18);
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      padding: 0.6rem 2.5rem;
+      background: rgba(14, 9, 5, 0.96);
+    }
+    .nav-logo {
+      font-family: var(--ff-display);
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      letter-spacing: 0.18em;
+      color: var(--verde);
+      text-decoration: none;
+      position: relative;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-logo::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 2px;
+      background: var(--terra);
+      transition: width 0.4s ease;
+    }
+    .nav-logo:hover { color: var(--ocre); }
+    .nav-logo:hover::after { width: 100%; }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--crema2);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-links a::before {
+      content: '//';
+      color: var(--verde);
+      opacity: 0;
+      margin-right: 4px;
+      transition: opacity 0.3s;
+    }
+    .nav-links a:hover { color: var(--verde); }
+    .nav-links a:hover::before { opacity: 1; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1100;
+      padding: 4px;
+      border: none;
+      background: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--verde);
+      transition: all 0.35s cubic-bezier(.77,0,.175,1);
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--terra); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--terra); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(14,9,5,0.97);
+      z-index: 1050;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a {
+      font-family: var(--ff-display);
+      font-size: clamp(1.6rem, 6vw, 2.4rem);
+      color: var(--crema);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--verde); }
+    .mobile-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      height: 2px;
+      width: 0;
+      background: var(--terra);
+      transition: width 0.4s;
+    }
+    .mobile-menu a:hover::after { width: 100%; }
+    .mobile-menu-tag {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      color: var(--verde);
+      letter-spacing: 0.2em;
+      opacity: 0.6;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 0;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1800&q=80&fm=webp');
+      background-size: cover;
+      background-position: center 30%;
+      filter: brightness(0.22) saturate(1.4);
+      transform: scale(1.04);
+      transition: transform 8s ease;
+    }
+    .hero:hover .hero-bg { transform: scale(1.0); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(14,9,5,0.9) 0%,
+        rgba(26,16,9,0.6) 50%,
+        rgba(190,89,65,0.15) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 8rem 2.5rem 4rem;
+      max-width: 900px;
+      margin-left: 5vw;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--verde);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s ease 0.3s forwards;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background: var(--verde);
+    }
+
+    .hero-title {
+      font-family: var(--ff-display);
+      font-size: clamp(2.4rem, 5.5vw, 4.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--crema);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeSlideUp 0.9s ease 0.5s forwards;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--verde);
+      position: relative;
+      display: inline-block;
+    }
+    .hero-title em::after {
+      content: '';
+      position: absolute;
+      bottom: 4px; left: 0; right: 0;
+      height: 3px;
+      background: var(--terra);
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: lineReveal 0.7s ease 1.4s forwards;
+    }
+    .hero-title .title-accent {
+      color: var(--ocre);
+      display: block;
+    }
+
+    .hero-desc {
+      font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+      line-height: 1.75;
+      color: rgba(245,240,232,0.7);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeSlideUp 0.9s ease 0.8s forwards;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--negro);
+      background: var(--verde);
+      border: none;
+      padding: 1rem 2.2rem;
+      cursor: pointer;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+      transition: all 0.4s ease;
+      opacity: 0;
+      animation: fadeSlideUp 0.9s ease 1.0s forwards;
+    }
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(216,184,55,0.9) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .hero-cta:hover {
+      color: var(--negro2);
+      background: var(--ocre);
+      box-shadow: 0 0 30px rgba(180,193,54,0.5), 0 0 60px rgba(180,193,54,0.2);
+      transform: translate(-2px, -2px);
+    }
+    .hero-cta:hover::before { opacity: 1; }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: rgba(245,240,232,0.4);
+      text-transform: uppercase;
+      z-index: 2;
+      animation: bounce 2s ease-in-out infinite 2s;
+    }
+    .hero-scroll-hint svg { animation: scrollPulse 2s ease-in-out infinite; }
+
+    /* ===== SOBRE NOSOTROS ===== */
+    .sobre {
+      background: var(--verde);
+      position: relative;
+      padding: 6rem 0;
+      overflow: hidden;
+    }
+    .sobre::before {
+      content: 'KHAYEN';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%) rotate(-8deg);
+      font-family: var(--ff-display);
+      font-size: clamp(5rem, 18vw, 14rem);
+      color: rgba(14,9,5,0.07);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: 0.05em;
+    }
+    .sobre-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    .sobre-card-main {
+      background: var(--negro);
+      color: var(--crema);
+      padding: 3rem 2.5rem;
+      transform: rotate(-1.5deg) translateY(-20px);
+      z-index: 3;
+      position: relative;
+      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+      transition: transform 0.4s ease;
+    }
+    .sobre-card-main:hover { transform: rotate(0deg) translateY(-24px); }
+    .sobre-card-main h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--verde);
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+    .sobre-card-main p {
+      font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+      line-height: 1.8;
+      color: rgba(245,240,232,0.85);
+    }
+    .sobre-inpi {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--verde);
+      margin-top: 1.5rem;
+      opacity: 0.7;
+      border-top: 1px solid rgba(180,193,54,0.3);
+      padding-top: 1rem;
+    }
+    .sobre-card-secondary {
+      background: var(--terra);
+      color: var(--crema);
+      padding: 3rem 2.5rem;
+      transform: rotate(2deg) translateY(20px);
+      z-index: 2;
+      position: relative;
+      align-self: start;
+      margin-top: 3rem;
+      clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+      transition: transform 0.4s ease;
+    }
+    .sobre-card-secondary:hover { transform: rotate(0deg) translateY(16px); }
+    .sobre-card-secondary h3 {
+      font-family: var(--ff-display);
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+    .sobre-card-secondary p {
+      font-size: clamp(0.82rem, 1.2vw, 0.9rem);
+      line-height: 1.75;
+      opacity: 0.9;
+    }
+    .sobre-pill {
+      display: inline-block;
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: rgba(14,9,5,0.25);
+      color: var(--crema);
+      padding: 0.35rem 0.8rem;
+      margin-top: 1.2rem;
+      border: 1px solid rgba(245,240,232,0.3);
+    }
+
+    /* ===== LABORATORIO ===== */
+    .lab {
+      background: var(--ocre);
+      position: relative;
+      padding: 7rem 2.5rem 8rem;
+      overflow: hidden;
+    }
+    .lab::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(26,16,9,0.2) 100%);
+      pointer-events: none;
+    }
+    .lab-header {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 4rem;
+    }
+    .lab-header h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: var(--negro);
+      line-height: 1.1;
+    }
+    .lab-header p {
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      color: rgba(14,9,5,0.7);
+      max-width: 480px;
+      margin: 1rem auto 0;
+      line-height: 1.7;
+    }
+    .lab-section-tag {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .lab-canvas {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      min-height: 520px;
+      z-index: 2;
+    }
+    .lab-card {
+      position: relative;
+      background: var(--negro);
+      color: var(--crema);
+      padding: 2rem 1.8rem;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+      transition: all 0.45s cubic-bezier(.23,1,.32,1);
+      cursor: default;
+    }
+    .lab-card:hover {
+      transform: rotate(0deg) !important;
+      box-shadow: 0 24px 60px rgba(14,9,5,0.5);
+      z-index: 10;
+    }
+    .lab-card-1 {
+      width: min(340px, 90%);
+      transform: rotate(-3deg);
+      margin-bottom: 2rem;
+    }
+    .lab-card-2 {
+      width: min(320px, 90%);
+      transform: rotate(4deg);
+      margin-left: auto;
+      margin-top: -60px;
+    }
+    .lab-card-3 {
+      width: min(360px, 90%);
+      transform: rotate(-1.5deg);
+      margin: 2rem auto 0;
+    }
+    .lab-card-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 1.2rem;
+    }
+    .lab-card h3 {
+      font-family: var(--ff-display);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--verde);
+      margin-bottom: 0.8rem;
+      line-height: 1.2;
+    }
+    .lab-card p {
+      font-size: clamp(0.8rem, 1.2vw, 0.88rem);
+      line-height: 1.75;
+      color: rgba(245,240,232,0.78);
+    }
+    .lab-card-tag {
+      font-family: var(--ff-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-top: 1.2rem;
+      display: block;
+      border-top: 1px solid rgba(190,89,65,0.3);
+      padding-top: 0.8rem;
+    }
+    .lab-card:hover h3 { color: var(--ocre); }
+
+    /* ===== COLECCION ===== */
+    .coleccion {
+      background: var(--negro2);
+      padding: 7rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .coleccion::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--terra), transparent);
+    }
+    .coleccion-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .coleccion-text { padding-right: 2rem; }
+    .coleccion-tag {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--terra);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .coleccion-text h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.1;
+      color: var(--crema);
+      margin-bottom: 1.5rem;
+    }
+    .coleccion-text h2 span { color: var(--verde); }
+    .coleccion-text p {
+      font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+      line-height: 1.8;
+      color: rgba(245,240,232,0.72);
+      margin-bottom: 1.5rem;
+    }
+    .coleccion-specs {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 1.8rem;
+    }
+    .coleccion-spec {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: rgba(245,240,232,0.6);
+    }
+    .coleccion-spec::before {
+      content: '→';
+      color: var(--verde);
+      font-size: 0.8rem;
+    }
+    .coleccion-visual {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+    }
+    .coleccion-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.2) brightness(0.85);
+      transition: transform 0.7s ease, filter 0.4s ease;
+    }
+    .coleccion-visual:hover .coleccion-img {
+      transform: scale(1.04);
+      filter: saturate(1.4) brightness(0.9);
+    }
+    .coleccion-visual-label {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      font-family: var(--ff-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--crema);
+      background: rgba(14,9,5,0.75);
+      padding: 0.5rem 1rem;
+      backdrop-filter: blur(4px);
+    }
+    .coleccion-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: -8px;
+      background: var(--terra);
+      color: var(--crema);
+      font-family: var(--ff-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 8px 100%);
+    }
+
+    /* ===== TESTIMONIOS ===== */
+    .testimonios {
+      background: var(--terra);
+      padding: 6rem 2.5rem 7rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonios::before {
+      content: '"';
+      position: absolute;
+      top: -1rem;
+      left: 2%;
+      font-family: var(--ff-display);
+      font-size: clamp(8rem, 20vw, 18rem);
+      color: rgba(14,9,5,0.12);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .testimonios-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      position: relative;
+      z-index: 2;
+    }
+    .testimonios-tag {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--negro);
+      opacity: 0.7;
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+    .testimonios-header h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--crema);
+      line-height: 1.1;
+    }
+
+    .testi-cloud {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      z-index: 2;
+    }
+    .testi-card {
+      background: var(--negro);
+      color: var(--crema);
+      padding: 2rem 1.8rem 1.8rem;
+      position: relative;
+      transition: all 0.45s cubic-bezier(.23,1,.32,1);
+    }
+    .testi-card:nth-child(1) { transform: rotate(-2deg) translateY(8px); clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%); }
+    .testi-card:nth-child(2) { transform: rotate(1.5deg) translateY(-12px); clip-path: polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px); }
+    .testi-card:nth-child(3) { transform: rotate(3deg) translateY(4px); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%); }
+    .testi-card:nth-child(4) { transform: rotate(-1deg) translateY(-8px); clip-path: polygon(0 0, 100% 0, 100% 100%, 12px 100%, 0 calc(100% - 12px)); }
+
+    .testi-card:hover {
+      transform: rotate(0) translateY(-6px) !important;
+      box-shadow: 0 20px 50px rgba(14,9,5,0.5), 0 0 20px rgba(180,193,54,0.15);
+      z-index: 5;
+    }
+    .testi-card:hover .testi-quote { color: var(--verde); }
+
+    .testi-avatar {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 1.2rem;
+      flex-shrink: 0;
+    }
+    .testi-top {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .testi-meta {}
+    .testi-name {
+      font-family: var(--ff-display);
+      font-size: 0.9rem;
+      color: var(--verde);
+      letter-spacing: 0.05em;
+    }
+    .testi-loc {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: rgba(245,240,232,0.45);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .testi-quote {
+      font-size: clamp(0.82rem, 1.3vw, 0.92rem);
+      line-height: 1.75;
+      color: rgba(245,240,232,0.82);
+      font-style: italic;
+      transition: color 0.3s;
+    }
+    .testi-stars {
+      display: flex;
+      gap: 3px;
+      margin-top: 1.2rem;
+    }
+    .testi-stars svg { width: 14px; height: 14px; fill: var(--ocre); }
+
+    /* ===== CONTACTO ===== */
+    .contacto {
+      background: var(--negro);
+      padding: 7rem 2.5rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .contacto::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--verde), transparent);
+    }
+    .contacto-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .contacto-deco {
+      position: absolute;
+      top: -3rem;
+      right: -4rem;
+      width: 260px;
+      height: 260px;
+      border: 2px solid rgba(180,193,54,0.12);
+      transform: rotate(15deg);
+      pointer-events: none;
+    }
+    .contacto-deco2 {
+      position: absolute;
+      bottom: -2rem;
+      left: -3rem;
+      width: 180px;
+      height: 180px;
+      border: 2px solid rgba(190,89,65,0.15);
+      transform: rotate(-8deg);
+      pointer-events: none;
+    }
+    .contacto-header {
+      margin-bottom: 3rem;
+    }
+    .contacto-tag {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--verde);
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+    .contacto-header h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: var(--crema);
+      line-height: 1.05;
+    }
+    .contacto-header h2 span { color: var(--terra); }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .form-full { grid-column: 1 / -1; }
+    .form-group { position: relative; }
+    .form-group label {
+      display: block;
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.5);
+      margin-bottom: 0.5rem;
+      transition: color 0.3s;
+    }
+    .form-group:focus-within label { color: var(--verde); }
+    .form-control {
+      width: 100%;
+      background: rgba(245,240,232,0.04);
+      border: 1px solid rgba(245,240,232,0.12);
+      color: var(--crema);
+      padding: 1rem 1.2rem;
+      font-family: var(--ff-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.35s ease;
+      border-radius: 0;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-control::placeholder { color: rgba(245,240,232,0.25); }
+    .form-control:focus {
+      border-color: var(--verde);
+      background: rgba(180,193,54,0.06);
+      box-shadow: 0 0 0 1px var(--verde), 0 0 20px rgba(180,193,54,0.15);
+    }
+    textarea.form-control {
+      min-height: 140px;
+      resize: vertical;
+    }
+    .form-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--negro);
+      background: var(--verde);
+      border: none;
+      padding: 1.1rem 2.4rem;
+      cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+      transition: all 0.35s ease;
+      margin-top: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .form-submit:hover {
+      background: var(--ocre);
+      box-shadow: 0 0 28px rgba(180,193,54,0.4);
+      transform: translate(-2px,-2px);
+    }
+    .form-submit::after {
+      content: '→';
+      font-size: 1rem;
+      transition: transform 0.3s;
+    }
+    .form-submit:hover::after { transform: translateX(4px); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--negro2);
+      padding: 3rem 2.5rem;
+      position: relative;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: var(--ff-display);
+      font-size: 1.4rem;
+      color: var(--verde);
+      letter-spacing: 0.15em;
+    }
+    .footer-copy {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: rgba(245,240,232,0.35);
+      text-transform: uppercase;
+    }
+    .footer-social {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(245,240,232,0.15);
+      color: rgba(245,240,232,0.5);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .footer-social a svg { width: 18px; height: 18px; fill: currentColor; transition: fill 0.3s; }
+    .footer-social a:hover {
+      border-color: var(--verde);
+      color: var(--negro);
+      background: var(--verde);
+      box-shadow: 0 0 16px rgba(180,193,54,0.4);
+      transform: translateY(-3px);
+    }
+    .footer-social a:hover svg { fill: var(--negro); }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes lineReveal {
+      to { transform: scaleX(1); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 1; }
+    }
+    @keyframes floatA {
+      0%, 100% { transform: rotate(-3deg) translateY(0); }
+      50%       { transform: rotate(-3deg) translateY(-10px); }
+    }
+    @keyframes floatB {
+      0%, 100% { transform: rotate(4deg) translateY(-60px); }
+      50%       { transform: rotate(4deg) translateY(-70px); }
+    }
+    @keyframes floatC {
+      0%, 100% { transform: rotate(-1.5deg) translateY(0); }
+      50%       { transform: rotate(-1.5deg) translateY(-8px); }
+    }
+    .lab-card-1:not(:hover) { animation: floatA 5s ease-in-out infinite; }
+    .lab-card-2:not(:hover) { animation: floatB 6s ease-in-out infinite 1s; }
+    .lab-card-3:not(:hover) { animation: floatC 4.5s ease-in-out infinite 0.5s; }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .sobre-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .sobre-card-main { transform: rotate(-1deg); }
+      .sobre-card-secondary { transform: rotate(1deg); margin-top: 0; }
+      .coleccion-inner { grid-template-columns: 1fr; }
+      .coleccion-text { padding-right: 0; }
+      .coleccion-visual { max-width: 420px; aspect-ratio: 4/3; }
+      .testi-cloud { grid-template-columns: 1fr; }
+      .testi-card:nth-child(even) { margin-left: 1.5rem; }
+      .lab-card-2 { margin-top: 0; }
+    }
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      nav.scrolled { padding: 0.6rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+      .hero-content { padding: 7rem 1.5rem 4rem; margin-left: 0; }
+      .sobre { padding: 4rem 0; }
+      .sobre-inner { padding: 0 1.5rem; }
+      .lab { padding: 5rem 1.5rem 6rem; }
+      .lab-canvas { min-height: auto; }
+      .lab-card-1, .lab-card-2, .lab-card-3 { width: 100%; margin: 0 0 1.5rem 0; }
+      .lab-card-2 { margin-top: 0; }
+      .coleccion { padding: 5rem 1.5rem; }
+      .testimonios { padding: 5rem 1.5rem 6rem; }
+      .testi-card:nth-child(even) { margin-left: 0.5rem; }
+      .contacto { padding: 5rem 1.5rem 4rem; }
+      .contacto-deco, .contacto-deco2 { display: none; }
+      .form-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .testi-cloud { gap: 1rem; }
+      .testi-card:nth-child(even) { margin-left: 0; }
+      .testi-card:nth-child(1) { transform: rotate(-1deg); }
+      .testi-card:nth-child(2) { transform: rotate(1deg); }
+      .testi-card:nth-child(3) { transform: rotate(-1deg); }
+      .testi-card:nth-child(4) { transform: rotate(0.5deg); }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav id="nav">
+  <a href="#inicio" class="nav-logo">KHAYEN</a>
+  <ul class="nav-links">
+    <li><a href="#identidad">Identidad</a></li>
+    <li><a href="#laboratorio">Laboratorio</a></li>
+    <li><a href="#coleccion">Colección</a></li>
+    <li><a href="#visiones">Visiones</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <span class="mobile-menu-tag">// Navegación</span>
+  <a href="#identidad" class="mobile-link">Identidad</a>
+  <a href="#laboratorio" class="mobile-link">Laboratorio</a>
+  <a href="#coleccion" class="mobile-link">Colección</a>
+  <a href="#visiones" class="mobile-link">Visiones</a>
+  <a href="#contacto" class="mobile-link">Contacto</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Misiones, Argentina · Diseño de Autor</div>
+    <h1 class="hero-title">
+      <em>Texturas</em> con
+      <span class="title-accent">memoria textil</span>
+    </h1>
+    <p class="hero-desc">Prendas que nacen del descarte. Colecciones que subvierten el ciclo. Cada fragmento de tela tiene una historia que merece continuar.</p>
+    <a href="#coleccion" class="hero-cta" id="heroCta">Ver Colección</a>
+  </div>
+  <div class="hero-scroll-hint">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 3v14M5 13l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Desplazar</span>
+  </div>
+</section>
+
+<!-- ===== SOBRE NOSOTROS ===== -->
+<section class="sobre" id="identidad">
+  <div class="sobre-inner">
+    <div class="sobre-card-main reveal">
+      <h2>Identidad<br/>Khayén</h2>
+      <p>KHAYEN nació oficialmente en abril de 2025 (I.N.P.I. Acta N° 4491655). Su nombre es una fusión de los nombres de las hijas de la creadora de la marca, con la intención de que ellas le den continuidad en el futuro.</p>
+      <br/>
+      <p>El concepto de KHAYEN se basa en la idea de dar nueva vida a retazos de tela, promoviendo el reciclaje y la reducción de desechos textiles. Busca colaboraciones con fábricas de ropa y proveedores de telas sobrantes o recicladas, y las combina también con telas compradas.</p>
+      <br/>
+      <p>Cada prenda contará una historia diferente, usando colores y patrones dispares, originando así colecciones disruptivas, atemporales y de bajo impacto ambiental.</p>
+      <div class="sobre-inpi">I.N.P.I. Acta N° 4491655 · Abril 2025 · Misiones, AR</div>
+    </div>
+    <div class="sobre-card-secondary reveal">
+      <h3>Diseño de Autor &amp; Upcycling</h3>
+      <p>Moda que no sigue tendencias: las crea. Cada pieza es única porque nace de la combinación irrepetible de materiales rescatados, intervenidos y resignificados en el corazón de la selva misionera.</p>
+      <span class="sobre-pill">// sustentable · atemporal · único</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LABORATORIO ===== -->
+<section class="lab" id="laboratorio">
+  <div class="lab-header reveal">
+    <span class="lab-section-tag">// Técnicas & Procesos</span>
+    <h2>Laboratorio<br/>Sustentable</h2>
+    <p>Un taller experimental donde los descartes se transforman en arte textil. Cada técnica es un acto político de resistencia contra el fast fashion.</p>
+  </div>
+
+  <div class="lab-canvas">
+    <div class="lab-card lab-card-1 reveal">
+      <svg class="lab-card-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="20" height="20" fill="#B4C136" opacity="0.9"/>
+        <rect x="26" y="4" width="26" height="20" fill="#D8B837" opacity="0.8"/>
+        <rect x="4" y="26" width="26" height="26" fill="#BE5941" opacity="0.85"/>
+        <rect x="32" y="26" width="20" height="20" fill="#B4C136" opacity="0.6"/>
+        <line x1="4" y1="24" x2="52" y2="24" stroke="#F5F0E8" stroke-width="1.5" opacity="0.4"/>
+        <line x1="24" y1="4" x2="24" y2="52" stroke="#F5F0E8" stroke-width="1.5" opacity="0.4"/>
+      </svg>
+      <h3>Patchwork Fragmentado</h3>
+      <p>Unión artesanal de fragmentos textiles de distintas procedencias. Cada costura es una decisión estética que narra el origen diverso de los materiales.</p>
+      <span class="lab-card-tag">// técnica principal · hecho a mano</span>
+    </div>
+
+    <div class="lab-card lab-card-2 reveal">
+      <svg class="lab-card-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="28" cy="28" r="22" stroke="#B4C136" stroke-width="2" fill="none"/>
+        <circle cx="28" cy="28" r="10" fill="#B4C136" opacity="0.2"/>
+        <path d="M14 28 Q20 14 28 20 Q36 26 42 14" stroke="#D8B837" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M28 6 L28 12 M28 44 L28 50 M6 28 L12 28 M44 28 L50 28" stroke="#B4C136" stroke-width="1.5" stroke-linecap="round"/>
+        <text x="22" y="32" font-family="monospace" font-size="7" fill="#F5F0E8" opacity="0.7">RECICLA</text>
+      </svg>
+      <h3>Recolección de Descartes Textiles</h3>
+      <p>Red activa de colaboración con fábricas de la región para rescatar sobrantes y retazos que de otro modo terminarían en vertederos. Cada kilogramo recuperado reduce la huella ambiental del sector.</p>
+      <span class="lab-card-tag">// economía circular · impacto cero</span>
+    </div>
+
+    <div class="lab-card lab-card-3 reveal">
+      <svg class="lab-card-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Palta -->
+        <ellipse cx="18" cy="30" rx="8" ry="13" fill="#4A7C3F" opacity="0.85"/>
+        <ellipse cx="18" cy="33" rx="4.5" ry="6" fill="#8B6340" opacity="0.7"/>
+        <!-- Uva -->
+        <circle cx="36" cy="20" r="5" fill="#7B3F8C" opacity="0.8"/>
+        <circle cx="44" cy="24" r="4.5" fill="#7B3F8C" opacity="0.75"/>
+        <circle cx="38" cy="29" r="4" fill="#9B5FAC" opacity="0.7"/>
+        <circle cx="46" cy="32" r="4" fill="#7B3F8C" opacity="0.8"/>
+        <path d="M40 14 Q44 10 48 13" stroke="#5A8040" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- Arrow -->
+        <path d="M24 36 L30 36 L28 33 M30 36 L28 39" stroke="#D8B837" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <h3>Tintes Naturales Experimentales</h3>
+      <p>Extracción de pigmentos orgánicos a partir de descartes de Palta y Uva: subproductos que tiñen las telas con tonos únicos e irrepetibles, cerrando el ciclo de la naturaleza.</p>
+      <span class="lab-card-tag">// pigmentos naturales · palta & uva</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COLECCIÓN ===== -->
+<section class="coleccion" id="coleccion">
+  <div class="coleccion-inner">
+    <div class="coleccion-text reveal">
+      <span class="coleccion-tag">// Nueva Colección 2025</span>
+      <h2><span>Flores de</span><br/>Misiones</h2>
+      <p>Una colección que respira el paisaje de la selva misionera. Realizada completamente a mano sobre bases de Lino, cada prenda es una obra única donde la naturaleza dicta los motivos.</p>
+      <p>Técnicas artesanales de estampado y foil metálico se fusionan para capturar la luminosidad de la flora nativa: orquídeas, heliconias y flores silvestres traducidas en textil.</p>
+      <div class="coleccion-specs">
+        <span class="coleccion-spec">Base de lino 100% natural</span>
+        <span class="coleccion-spec">Estampado artesanal a mano</span>
+        <span class="coleccion-spec">Foil metálico aplicado en frío</span>
+        <span class="coleccion-spec">Colección de edición limitada</span>
+        <span class="coleccion-spec">Piezas únicas e irrepetibles</span>
+      </div>
+    </div>
+    <div class="coleccion-visual reveal">
+      <img
+        class="coleccion-img"
+        src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=900&q=80&fm=webp"
+        alt="Colección Flores de Misiones — lino estampado artesanal con foil metálico"
+        loading="lazy"
+      />
+      <div class="coleccion-badge">Edición Limitada</div>
+      <div class="coleccion-visual-label">Flores de Misiones · 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIOS ===== -->
+<section class="testimonios" id="visiones">
+  <div class="testimonios-header reveal">
+    <span class="testimonios-tag">// Visiones Aliadas</span>
+    <h2>Las que ya<br/>visten el manifiesto</h2>
+  </div>
+
+  <div class="testi-cloud">
+    <!-- Testimonio 1 -->
+    <div class="testi-card reveal">
+      <div class="testi-top">
+        <svg class="testi-avatar" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="22,2 42,14 42,30 22,42 2,30 2,14" fill="#B4C136" opacity="0.15"/>
+          <polygon points="22,2 42,14 42,30 22,42 2,30 2,14" stroke="#B4C136" stroke-width="1.5" fill="none"/>
+          <circle cx="22" cy="17" r="6" fill="#B4C136" opacity="0.6"/>
+          <path d="M10 36 Q22 28 34 36" stroke="#B4C136" stroke-width="1.5" fill="none"/>
+        </svg>
+        <div class="testi-meta">
+          <div class="testi-name">Valentina R.</div>
+          <div class="testi-loc">Posadas, Misiones</div>
+        </div>
+      </div>
+      <p class="testi-quote">"Compré una campera de patchwork y se convirtió en la prenda más comentada de mi armario. La gente me pregunta por ella en todos lados. Es arte que se usa."</p>
+      <div class="testi-stars">
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+      </div>
+    </div>
+
+    <!-- Testimonio 2 -->
+    <div class="testi-card reveal">
+      <div class="testi-top">
+        <svg class="testi-avatar" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="4" width="36" height="36" stroke="#D8B837" stroke-width="1.5" fill="none"/>
+          <rect x="10" y="10" width="24" height="24" fill="#D8B837" opacity="0.12"/>
+          <circle cx="22" cy="18" r="6" fill="#D8B837" opacity="0.6"/>
+          <path d="M11 37 Q22 29 33 37" stroke="#D8B837" stroke-width="1.5" fill="none"/>
+          <line x1="4" y1="22" x2="40" y2="22" stroke="#D8B837" stroke-width="0.5" opacity="0.3"/>
+        </svg>
+        <div class="testi-meta">
+          <div class="testi-name">Luciana M.</div>
+          <div class="testi-loc">Buenos Aires</div>
+        </div>
+      </div>
+      <p class="testi-quote">"Finalmente una marca que practica lo que predica. El proceso detrás de cada prenda es tan bello como el resultado. KHAYEN es el futuro de la moda sustentable."</p>
+      <div class="testi-stars">
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+      </div>
+    </div>
+
+    <!-- Testimonio 3 -->
+    <div class="testi-card reveal">
+      <div class="testi-top">
+        <svg class="testi-avatar" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 4 L40 16 L40 28 L22 40 L4 28 L4 16 Z" stroke="#BE5941" stroke-width="1.5" fill="#BE5941" fill-opacity="0.12"/>
+          <circle cx="22" cy="18" r="6" fill="#BE5941" opacity="0.65"/>
+          <path d="M11 37 Q22 30 33 37" stroke="#BE5941" stroke-width="1.5" fill="none"/>
+          <circle cx="22" cy="22" r="18" stroke="#BE5941" stroke-width="0.5" fill="none" opacity="0.3"/>
+        </svg>
+        <div class="testi-meta">
+          <div class="testi-name">Romina P.</div>
+          <div class="testi-loc">Oberá, Misiones</div>
+        </div>
+      </div>
+      <p class="testi-quote">"Tengo una remera con tinte de palta que uso hace 8 meses y cada vez que la veo pienso en la historia detrás. Eso es lo que diferencia a KHAYEN de todo lo demás."</p>
+      <div class="testi-stars">
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+      </div>
+    </div>
+
+    <!-- Testimonio 4 -->
+    <div class="testi-card reveal">
+      <div class="testi-top">
+        <svg class="testi-avatar" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="8" width="32" height="32" stroke="#B4C136" stroke-width="1.5" fill="none" transform="rotate(10 22 22)"/>
+          <circle cx="22" cy="18" r="6" fill="#B4C136" opacity="0.55"/>
+          <path d="M11 37 Q22 29 33 37" stroke="#B4C136" stroke-width="1.5" fill="none"/>
+          <rect x="10" y="10" width="24" height="24" stroke="#D8B837" stroke-width="0.5" fill="none" transform="rotate(-5 22 22)" opacity="0.4"/>
+        </svg>
+        <div class="testi-meta">
+          <div class="testi-name">Sofía T.</div>
+          <div class="testi-loc">Corrientes</div>
+        </div>
+      </div>
+      <p class="testi-quote">"La colección de Flores de Misiones me enamoró. El foil metálico sobre lino tiene una elegancia rústica que no vi en ninguna otra marca argentina. Piezas de colección."</p>
+      <div class="testi-stars">
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+        <svg viewBox="0 0 14 14"><path d="M7 1l1.5 4.5H13l-3.7 2.7 1.4 4.3L7 10l-3.7 2.5 1.4-4.3L1 5.5h4.5z"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACTO ===== -->
+<section class="contacto" id="contacto">
+  <div class="contacto-inner">
+    <div class="contacto-deco"></div>
+    <div class="contacto-deco2"></div>
+    <div class="contacto-header reveal">
+      <span class="contacto-tag">// Conectate</span>
+      <h2>Hablemos de<br/><span>tu próxima pieza</span></h2>
+    </div>
+    <div class="form-grid reveal">
+      <div class="form-group">
+        <label for="nombre">Nombre / Identidad</label>
+        <input class="form-control" type="text" id="nombre" placeholder="¿Cómo te llamás?" autocomplete="name" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input class="form-control" type="email" id="email" placeholder="tu@correo.com" autocomplete="email" />
+      </div>
+      <div class="form-group">
+        <label for="telefono">Teléfono de contacto</label>
+        <input class="form-control" type="tel" id="telefono" placeholder="+54 ..." autocomplete="tel" />
+      </div>
+      <div class="form-group">
+        <label for="asunto">Asunto</label>
+        <input class="form-control" type="text" id="asunto" placeholder="Colección / Colaboración / Consulta" />
+      </div>
+      <div class="form-group form-full">
+        <label for="mensaje">Mensaje</label>
+        <textarea class="form-control" id="mensaje" placeholder="Contanos tu idea, tu historia, tu proyecto..."></textarea>
+      </div>
+      <div class="form-full">
+        <button class="form-submit" type="button">Enviar manifiesto</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">KHAYEN</div>
+      <div class="footer-copy" style="margin-top:0.5rem;">Diseño de Autor · Upcycling · Misiones, AR</div>
+    </div>
+    <div class="footer-copy">© 2025 KHAYEN — I.N.P.I. Acta N° 4491655<br/>Todos los derechos reservados.</div>
+    <div class="footer-social">
+      <!-- Instagram -->
+      <a href="#" aria-label="Instagram de KHAYEN">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+      <!-- Facebook -->
+      <a href="#" aria-label="Facebook de KHAYEN">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ===== NAV SCROLL =====
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ===== HAMBURGER =====
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    mobileMenu.setAttribute('aria-hidden', !open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ===== CTA RADIAL GLOW =====
+  const cta = document.getElementById('heroCta');
+  if (cta) {
+    cta.addEventListener('mousemove', e => {
+      const r = cta.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * 100;
+      const y = ((e.clientY - r.top) / r.height) * 100;
+      cta.style.setProperty('--mx', x + '%');
+      cta.style.setProperty('--my', y + '%');
+    });
+  }
+
+  // ===== SCROLL REVEAL =====
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => revealObs.observe(el));
+</script>
+</body>
+</html>

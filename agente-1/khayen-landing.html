@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="KHAYEN, diseño de autor sustentable y upcycling textil desde Misiones, Argentina.">
+  <title>KHAYEN | Texturas con memoria textil</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111111'/%3E%3Cpath d='M8 45 22 10l10 22 10-22 14 35H43l-3-8H24l-3 8Z' fill='%23B4C136'/%3E%3Cpath d='M20 50h24' stroke='%23BE5941' stroke-width='6'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --verde: #B4C136;
+      --ocre: #D8B837;
+      --terra: #BE5941;
+      --tinta: #11110f;
+      --humo: #e9e3d3;
+      --papel: #f5efdd;
+      --linea: rgba(17, 17, 15, .82);
+      --glow: 0 0 26px rgba(180, 193, 54, .55);
+      --font-display: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      --font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--tinta);
+      background: var(--tinta);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+      opacity: .18;
+      background-image:
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 5px 5px, 100% 9px;
+      mix-blend-mode: overlay;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button, input, textarea { font: inherit; }
+    ::selection { background: var(--terra); color: var(--papel); }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 4.5rem;
+      padding: .7rem clamp(1rem, 4vw, 3rem);
+      color: var(--papel);
+      background: rgba(17, 17, 15, .72);
+      border-bottom: 2px solid rgba(216, 184, 55, .35);
+      backdrop-filter: blur(14px) saturate(1.35);
+    }
+
+    .brand {
+      display: inline-grid;
+      place-items: center;
+      min-width: 8.4rem;
+      padding: .35rem .7rem .25rem;
+      color: var(--tinta);
+      background: linear-gradient(115deg, var(--verde), var(--ocre) 54%, var(--terra));
+      border: 2px solid var(--papel);
+      box-shadow: 7px 7px 0 var(--terra);
+      font-family: var(--font-display);
+      font-size: clamp(1.45rem, 2.4vw, 2.25rem);
+      letter-spacing: .04em;
+      line-height: 1;
+      transform: skew(-9deg) rotate(-1.5deg);
+    }
+
+    .nav-toggle { display: none; }
+    .hamburger {
+      display: none;
+      width: 3.1rem;
+      height: 3.1rem;
+      place-items: center;
+      border: 2px solid var(--verde);
+      background: var(--tinta);
+      cursor: pointer;
+      box-shadow: 5px 5px 0 var(--terra);
+    }
+
+    .hamburger span,
+    .hamburger span::before,
+    .hamburger span::after {
+      display: block;
+      width: 1.45rem;
+      height: 2px;
+      background: var(--ocre);
+      content: "";
+      transition: transform .28s ease, opacity .28s ease;
+    }
+
+    .hamburger span::before { transform: translateY(-8px); }
+    .hamburger span::after { transform: translateY(6px); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(.65rem, 2vw, 1.4rem);
+      font-size: .76rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: .55rem .1rem;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: .2rem;
+      width: 100%;
+      height: .22rem;
+      background: var(--terra);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .22s ease;
+    }
+
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    main { background: var(--papel); }
+    section {
+      position: relative;
+      isolation: isolate;
+      padding: clamp(4.5rem, 9vw, 8rem) clamp(1.1rem, 5vw, 5.6rem);
+    }
+
+    .kicker {
+      display: inline-block;
+      margin: 0 0 1rem;
+      padding: .35rem .7rem;
+      color: var(--papel);
+      background: var(--tinta);
+      border: 2px solid currentColor;
+      font-size: .78rem;
+      font-weight: 950;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      transform: rotate(-2deg);
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      line-height: .95;
+      font-weight: 900;
+      letter-spacing: .01em;
+      text-transform: uppercase;
+    }
+
+    h1 { font-size: clamp(3.2rem, 9vw, 7.7rem); max-width: 11ch; }
+    h2 { font-size: clamp(2.25rem, 6vw, 5.2rem); max-width: 11ch; }
+    h3 { font-size: clamp(1.25rem, 2.4vw, 2rem); }
+    p { font-size: clamp(1rem, 1.5vw, 1.16rem); line-height: 1.58; }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-items: end;
+      padding-top: 7rem;
+      color: var(--papel);
+      background:
+        linear-gradient(105deg, rgba(17,17,15,.92), rgba(17,17,15,.46) 52%, rgba(190,89,65,.24)),
+        url("https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1800&q=82") center / cover;
+    }
+
+    .hero::before {
+      content: "UPCYCLING / MISIONES / AUTOR";
+      position: absolute;
+      top: 20%;
+      right: -9rem;
+      z-index: -1;
+      color: rgba(216, 184, 55, .18);
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 11vw, 9rem);
+      white-space: nowrap;
+      transform: rotate(90deg);
+    }
+
+    .hero-content {
+      width: min(62rem, 100%);
+      transform: translateY(-2vh);
+    }
+
+    .split-title span {
+      display: block;
+      text-shadow: 5px 5px 0 rgba(190,89,65,.75), -2px -2px 0 rgba(180,193,54,.9);
+      animation: text-shift 5s ease-in-out infinite alternate;
+    }
+
+    .hero p {
+      max-width: 39rem;
+      margin: 1.4rem 0 1.8rem;
+      color: rgba(245, 239, 221, .88);
+      font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    }
+
+    .cta {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: .8rem;
+      min-height: 3.5rem;
+      padding: .85rem 1.2rem;
+      overflow: hidden;
+      color: var(--tinta);
+      background: linear-gradient(135deg, var(--verde), var(--ocre), var(--terra));
+      border: 2px solid var(--papel);
+      box-shadow: 8px 8px 0 rgba(245,239,221,.9);
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
+
+    .cta::after {
+      content: "";
+      width: 1.25rem;
+      height: 1.25rem;
+      background: currentColor;
+      clip-path: polygon(12% 0, 100% 50%, 12% 100%, 34% 50%);
+    }
+
+    .cta:hover {
+      transform: translate(-4px, -4px) skew(-7deg);
+      box-shadow: 0 0 34px rgba(180,193,54,.8), 12px 12px 0 var(--terra);
+      filter: saturate(1.5);
+    }
+
+    .identity {
+      min-height: 48rem;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(245,239,221,.35), transparent 25rem),
+        linear-gradient(145deg, var(--verde), var(--ocre) 52%, var(--terra));
+      border-top: 8px solid var(--tinta);
+      border-bottom: 8px solid var(--tinta);
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(18rem, 1.1fr);
+      gap: clamp(1rem, 5vw, 5rem);
+      align-items: center;
+    }
+
+    .identity-card {
+      padding: clamp(1.2rem, 3vw, 2rem);
+      background: rgba(245, 239, 221, .9);
+      border: 3px solid var(--tinta);
+      box-shadow: 12px 12px 0 rgba(17,17,15,.82);
+      transform: rotate(-2.5deg);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .identity-card:hover {
+      transform: rotate(0deg) translateY(-.35rem);
+      box-shadow: 18px 18px 0 rgba(17,17,15,.9), var(--glow);
+    }
+
+    .identity-story {
+      position: relative;
+      z-index: 2;
+      margin: 0;
+      font-weight: 760;
+    }
+
+    .stamp {
+      justify-self: center;
+      width: min(28rem, 100%);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      color: var(--papel);
+      background:
+        linear-gradient(rgba(17,17,15,.25), rgba(17,17,15,.58)),
+        url("https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1200&q=80") center / cover;
+      border: 3px solid var(--tinta);
+      clip-path: polygon(6% 12%, 84% 3%, 96% 75%, 43% 96%, 0 73%);
+      box-shadow: -16px 20px 0 rgba(17,17,15,.75);
+      transform: rotate(5deg);
+    }
+
+    .stamp strong {
+      width: 72%;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 4.7rem);
+      line-height: .92;
+      text-transform: uppercase;
+      text-shadow: 3px 3px 0 var(--terra);
+    }
+
+    .lab {
+      min-height: 48rem;
+      color: var(--papel);
+      background:
+        linear-gradient(135deg, rgba(17,17,15,.93), rgba(17,17,15,.7)),
+        url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1800&q=82") center / cover fixed;
+    }
+
+    .lab-head { max-width: 40rem; }
+    .floating-field {
+      min-height: 34rem;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1rem;
+      margin-top: clamp(2rem, 5vw, 4rem);
+    }
+
+    .process-card {
+      position: relative;
+      display: grid;
+      align-content: start;
+      min-height: 15rem;
+      padding: 1.2rem;
+      color: var(--tinta);
+      border: 3px solid var(--papel);
+      box-shadow: 9px 9px 0 rgba(245,239,221,.8);
+      transition: transform .35s ease, box-shadow .35s ease, background .35s ease;
+      animation: float-card 7s ease-in-out infinite;
+    }
+
+    .process-card:nth-child(1) {
+      grid-column: 1 / span 5;
+      background: var(--verde);
+      transform: rotate(-4deg);
+    }
+    .process-card:nth-child(2) {
+      grid-column: 7 / span 6;
+      margin-top: 3rem;
+      background: var(--ocre);
+      transform: rotate(3deg);
+      animation-delay: -2s;
+    }
+    .process-card:nth-child(3) {
+      grid-column: 3 / span 7;
+      margin-top: -1.2rem;
+      background: var(--terra);
+      color: var(--papel);
+      transform: rotate(-1deg);
+      animation-delay: -4s;
+    }
+
+    .process-card:hover {
+      transform: rotate(0deg) translateY(-.8rem) scale(1.02);
+      box-shadow: 0 0 35px rgba(216,184,55,.7), 13px 13px 0 rgba(245,239,221,.95);
+      background: linear-gradient(135deg, var(--verde), var(--ocre), var(--terra));
+    }
+
+    .icon {
+      width: 3rem;
+      height: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .icon path,
+    .icon circle,
+    .icon rect,
+    .icon polyline,
+    .icon line {
+      vector-effect: non-scaling-stroke;
+    }
+
+    .launch {
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, var(--papel) 0 55%, var(--terra) 55% 100%);
+    }
+
+    .launch-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(18rem, 1.08fr);
+      gap: clamp(1rem, 4vw, 3.5rem);
+      align-items: center;
+    }
+
+    .launch-text {
+      position: relative;
+      z-index: 2;
+      padding: clamp(1rem, 3vw, 2rem);
+      background: var(--papel);
+      border-left: 7px solid var(--terra);
+      transform: rotate(-1.4deg);
+    }
+
+    .launch-text p {
+      max-width: 40rem;
+      font-weight: 780;
+    }
+
+    .launch-image {
+      min-height: clamp(22rem, 52vw, 38rem);
+      background:
+        linear-gradient(rgba(17,17,15,.05), rgba(17,17,15,.5)),
+        url("https://images.unsplash.com/photo-1468327768560-75b778cbb551?auto=format&fit=crop&w=1400&q=82") center / cover;
+      border: 3px solid var(--tinta);
+      box-shadow: -14px 16px 0 var(--ocre);
+      clip-path: polygon(7% 0, 100% 10%, 90% 100%, 0 89%);
+      transform: rotate(2deg);
+    }
+
+    .reviews {
+      color: var(--papel);
+      background: var(--tinta);
+      overflow: hidden;
+    }
+
+    .review-cloud {
+      position: relative;
+      min-height: 43rem;
+      margin-top: 2rem;
+    }
+
+    .quote {
+      position: absolute;
+      width: min(22rem, 42vw);
+      padding: 1.1rem;
+      background: var(--papel);
+      color: var(--tinta);
+      border: 3px solid var(--ocre);
+      box-shadow: 10px 10px 0 var(--terra);
+      transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+    }
+
+    .quote:nth-child(1) { left: 2%; top: 3%; transform: rotate(-4deg); }
+    .quote:nth-child(2) { right: 5%; top: 11%; transform: rotate(5deg); }
+    .quote:nth-child(3) { left: 24%; bottom: 8%; transform: rotate(2deg); }
+    .quote:nth-child(4) { right: 16%; bottom: 0; transform: rotate(-3deg); }
+
+    .quote:hover {
+      background: linear-gradient(135deg, var(--papel), var(--verde));
+      transform: rotate(0deg) translateY(-.6rem);
+      box-shadow: 0 0 30px rgba(190,89,65,.75), 14px 14px 0 var(--ocre);
+    }
+
+    .avatar {
+      width: 3.4rem;
+      height: 3.4rem;
+      margin-bottom: .8rem;
+      background: var(--terra);
+      border: 2px solid var(--tinta);
+      clip-path: polygon(50% 0, 92% 22%, 80% 82%, 20% 82%, 8% 22%);
+    }
+
+    .quote:nth-child(even) .avatar {
+      background: var(--verde);
+      clip-path: circle(44% at 50% 48%);
+    }
+
+    .quote blockquote {
+      margin: 0;
+      font-size: clamp(1rem, 1.5vw, 1.12rem);
+      line-height: 1.45;
+      font-weight: 800;
+    }
+
+    .quote cite {
+      display: block;
+      margin-top: .9rem;
+      font-style: normal;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .contact {
+      background:
+        linear-gradient(112deg, var(--ocre) 0 36%, var(--verde) 36% 68%, var(--terra) 68% 100%);
+      border-top: 8px solid var(--papel);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .75fr) minmax(18rem, 1.25fr);
+      gap: clamp(1rem, 4vw, 4rem);
+      align-items: start;
+    }
+
+    .contact-copy {
+      position: sticky;
+      top: 6rem;
+      padding: 1.2rem;
+      color: var(--papel);
+      background: var(--tinta);
+      border: 3px solid var(--papel);
+      box-shadow: 12px 12px 0 rgba(17,17,15,.35);
+      transform: rotate(-2deg);
+    }
+
+    form {
+      display: grid;
+      gap: 1rem;
+      padding: clamp(1rem, 3vw, 2rem);
+      background: rgba(17,17,15,.92);
+      border: 3px solid var(--papel);
+      box-shadow: 16px 16px 0 rgba(17,17,15,.4);
+      transform: rotate(1deg);
+    }
+
+    label {
+      display: grid;
+      gap: .45rem;
+      color: var(--papel);
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      min-height: 3.35rem;
+      padding: .85rem 1rem;
+      color: var(--papel);
+      background: #1f1f1b;
+      border: 2px solid rgba(245,239,221,.55);
+      outline: none;
+      transition: border-color .22s ease, box-shadow .22s ease, background .22s ease, transform .22s ease;
+    }
+
+    textarea { min-height: 9rem; resize: vertical; }
+    input:focus,
+    textarea:focus {
+      color: var(--tinta);
+      background: var(--verde);
+      border-color: var(--tinta);
+      box-shadow: 0 0 0 4px var(--terra), 0 0 26px rgba(180,193,54,.9);
+      transform: translateX(-.35rem);
+    }
+
+    .submit {
+      min-height: 3.6rem;
+      color: var(--tinta);
+      background: var(--ocre);
+      border: 2px solid var(--papel);
+      box-shadow: 8px 8px 0 var(--terra);
+      font-weight: 950;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
+    }
+
+    .submit:hover {
+      transform: translate(-.35rem, -.35rem) rotate(-1deg);
+      filter: saturate(1.4);
+      box-shadow: 0 0 30px rgba(216,184,55,.8), 12px 12px 0 var(--verde);
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.6rem clamp(1rem, 5vw, 5.6rem);
+      color: var(--papel);
+      background: var(--tinta);
+      border-top: 2px solid rgba(245,239,221,.2);
+    }
+
+    .socials {
+      display: flex;
+      gap: .8rem;
+    }
+
+    .social {
+      display: grid;
+      place-items: center;
+      width: 2.7rem;
+      height: 2.7rem;
+      color: var(--papel);
+      border: 2px solid currentColor;
+      transition: transform .22s ease, color .22s ease, box-shadow .22s ease;
+    }
+
+    .social:hover {
+      color: var(--verde);
+      transform: rotate(-8deg) translateY(-.25rem);
+      box-shadow: 5px 5px 0 var(--terra);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(2rem);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes text-shift {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(.45rem); }
+    }
+
+    @keyframes float-card {
+      0%, 100% { translate: 0 0; }
+      50% { translate: .35rem -.8rem; }
+    }
+
+    @media (max-width: 980px) {
+      .hamburger { display: grid; }
+      .nav-links {
+        position: fixed;
+        top: 4.5rem;
+        right: 1rem;
+        width: min(21rem, calc(100vw - 2rem));
+        display: grid;
+        padding: 1rem;
+        background: rgba(17,17,15,.96);
+        border: 2px solid var(--verde);
+        box-shadow: 10px 10px 0 var(--terra);
+        transform: translateY(-1rem) scale(.96);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity .25s ease, transform .25s ease, visibility .25s ease;
+      }
+
+      .nav-toggle:checked ~ .hamburger span { transform: rotate(45deg); }
+      .nav-toggle:checked ~ .hamburger span::before { transform: rotate(90deg); }
+      .nav-toggle:checked ~ .hamburger span::after { opacity: 0; }
+      .nav-toggle:checked ~ .nav-links {
+        opacity: 1 !important;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+      }
+
+      .site-header:has(.nav-toggle:checked) .nav-links {
+        opacity: 1 !important;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+      }
+
+      .identity-grid,
+      .launch-wrap,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-copy { position: relative; top: auto; }
+      .floating-field { grid-template-columns: 1fr; min-height: auto; }
+      .process-card,
+      .process-card:nth-child(1),
+      .process-card:nth-child(2),
+      .process-card:nth-child(3) {
+        grid-column: auto;
+        margin-top: 0;
+      }
+      .launch { background: var(--papel); }
+      .review-cloud {
+        display: grid;
+        gap: 1rem;
+        min-height: auto;
+      }
+      .quote,
+      .quote:nth-child(1),
+      .quote:nth-child(2),
+      .quote:nth-child(3),
+      .quote:nth-child(4) {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .site-header { min-height: 4rem; }
+      .brand { min-width: 7rem; font-size: 1.35rem; box-shadow: 4px 4px 0 var(--terra); }
+      .hero { min-height: 100svh; padding-top: 6rem; }
+      h1 { font-size: clamp(2.7rem, 18vw, 4.4rem); }
+      h2 { font-size: clamp(2rem, 13vw, 3.4rem); }
+      section { padding-inline: 1rem; }
+      .hero::before { display: none; }
+      .identity-card,
+      .stamp,
+      form,
+      .contact-copy,
+      .launch-text,
+      .launch-image {
+        transform: none;
+      }
+      footer { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    @media (max-width: 980px) {
+      body .site-header #nav-toggle:checked ~ nav.nav-links,
+      body .site-header:has(#nav-toggle:checked) nav.nav-links,
+      body .site-header.menu-live nav.nav-links {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: translateY(0) scale(1) !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="KHAYEN inicio">KHAYEN</a>
+    <input class="nav-toggle" id="nav-toggle" type="checkbox" aria-label="Abrir menú">
+    <label class="hamburger" for="nav-toggle" aria-hidden="true"><span></span></label>
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="#identidad">Identidad</a>
+      <a href="#laboratorio">Laboratorio</a>
+      <a href="#flores">Flores</a>
+      <a href="#visiones">Visiones</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <main id="inicio">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content reveal">
+        <p class="kicker">Diseño de autor sustentable desde Misiones</p>
+        <h1 id="hero-title" class="split-title"><span>Texturas con</span><span>memoria textil</span></h1>
+        <p>KHAYEN rescata fragmentos, manchas, sobrantes y pulso de taller para convertirlos en prendas con carácter: una moda independiente, artesanal y de bajo impacto que no pide permiso para ser vista.</p>
+        <a class="cta" href="#contacto">Activar una pieza</a>
+      </div>
+    </section>
+
+    <section class="identity" id="identidad" aria-labelledby="identity-title">
+      <div class="identity-grid">
+        <div class="identity-card reveal">
+          <p class="kicker">Identidad Khayén</p>
+          <h2 id="identity-title">Materia familiar, futuro circular</h2>
+          <p class="identity-story">KHAYEN nació oficialmente en abril de 2025 (I.N.P.I. Acta N° 4491655). Su nombre es una fusión de los nombres de las hijas de la creadora de la marca, con la intención de que ellas le den continuidad en el futuro. El concepto de KHAYEN se basa en la idea de dar nueva vida a retazos de tela, promoviendo el reciclaje y la reducción de desechos textiles. Busca colaboraciones con fábricas de ropa y proveedores de telas sobrantes o recicladas, y las combina también con telas compradas. Cada prenda contará una historia diferente, usando colores y patrones dispares, originando así colecciones disruptivas, atemporales y de bajo impacto ambiental.</p>
+        </div>
+        <div class="stamp reveal" aria-label="Imagen de percheros textiles reutilizados">
+          <strong>Retazo vivo, prenda insurgente</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab" id="laboratorio" aria-labelledby="lab-title">
+      <div class="lab-head reveal">
+        <p class="kicker">Laboratorio Sustentable</p>
+        <h2 id="lab-title">Procesos que no se quedan quietos</h2>
+        <p>Un lienzo de pruebas: manos, descarte, tintes vegetales, choque de patrones y piezas que se mueven como si todavía estuvieran en mesa de corte.</p>
+      </div>
+      <div class="floating-field">
+        <article class="process-card reveal">
+          <svg class="icon" viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M8 12h20v18H8zM36 12h20v18H36zM8 38h20v14H8zM36 38h20v14H36z" fill="none" stroke="currentColor" stroke-width="4"/>
+            <path d="M28 21h8M28 45h8M18 30v8M46 30v8" stroke="currentColor" stroke-width="4"/>
+          </svg>
+          <h3>Técnicas de Patchwork</h3>
+          <p>Unión visible de fragmentos textiles: costuras como mapa, choque de telas como lenguaje.</p>
+        </article>
+        <article class="process-card reveal">
+          <svg class="icon" viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M18 18h28l-4 34H22z" fill="none" stroke="currentColor" stroke-width="4"/>
+            <path d="M24 18c1-7 15-7 16 0M16 28h32M25 36l7 7 9-13" fill="none" stroke="currentColor" stroke-width="4"/>
+          </svg>
+          <h3>Rescate textil</h3>
+          <p>Recolección de desechos y sobrantes de fábricas textiles para mitigar el impacto ambiental.</p>
+        </article>
+        <article class="process-card reveal">
+          <svg class="icon" viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M21 10c15 5 24 16 24 30 0 9-6 14-13 14s-13-5-13-14c0-8 4-16 2-30Z" fill="none" stroke="currentColor" stroke-width="4"/>
+            <circle cx="33" cy="38" r="6" fill="none" stroke="currentColor" stroke-width="4"/>
+            <path d="M43 17c7 1 11 6 12 13M12 44c8-2 14-1 20 4" stroke="currentColor" stroke-width="4"/>
+          </svg>
+          <h3>Tintes Palta + Uva</h3>
+          <p>Tintes naturales experimentales extraídos de descartes orgánicos de Palta y Uva.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="launch" id="flores" aria-labelledby="launch-title">
+      <div class="launch-wrap">
+        <div class="launch-text reveal">
+          <p class="kicker">Lanzamientos destacados</p>
+          <h2 id="launch-title">Colección Flores de Misiones</h2>
+          <p>Nueva colección inspirada en Flores de Misiones, realizada completamente a mano sobre bases de Lino, utilizando técnicas artesanales de estampado y foil metálico.</p>
+        </div>
+        <div class="launch-image reveal" aria-label="Flores tropicales para la colección Flores de Misiones"></div>
+      </div>
+    </section>
+
+    <section class="reviews" id="visiones" aria-labelledby="reviews-title">
+      <p class="kicker">Visiones Aliadas</p>
+      <h2 id="reviews-title">Cuatro voces, cero molde</h2>
+      <div class="review-cloud">
+        <article class="quote reveal">
+          <div class="avatar" aria-hidden="true"></div>
+          <blockquote>“La prenda parece salida de una expedición: tiene tierra, brillo y una historia que no se repite.”</blockquote>
+          <cite>Malena R.</cite>
+        </article>
+        <article class="quote reveal">
+          <div class="avatar" aria-hidden="true"></div>
+          <blockquote>“Me gustó que el reciclaje no se vea tímido. KHAYEN lo vuelve protagonista, casi una declaración.”</blockquote>
+          <cite>Camila V.</cite>
+        </article>
+        <article class="quote reveal">
+          <div class="avatar" aria-hidden="true"></div>
+          <blockquote>“Compré una pieza para escenario y terminó siendo mi ropa favorita para caminar la ciudad.”</blockquote>
+          <cite>Lucía M.</cite>
+        </article>
+        <article class="quote reveal">
+          <div class="avatar" aria-hidden="true"></div>
+          <blockquote>“El lino, el foil y los retazos se sienten hechos a mano sin perder potencia visual.”</blockquote>
+          <cite>Rocío A.</cite>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact" id="contacto" aria-labelledby="contact-title">
+      <div class="contact-grid">
+        <div class="contact-copy reveal">
+          <p class="kicker">Formulario de Contacto</p>
+          <h2 id="contact-title">Traé tu identidad al taller</h2>
+          <p>Consultas, colaboraciones con fábricas, encargos de autor y piezas con retazos propios. El mensaje entra como materia prima.</p>
+        </div>
+        <form class="reveal" action="#" method="post">
+          <label>Nombre / Identidad
+            <input type="text" name="nombre" autocomplete="name" placeholder="Tu nombre o alias">
+          </label>
+          <label>Email
+            <input type="email" name="email" autocomplete="email" placeholder="correo@dominio.com">
+          </label>
+          <label>Teléfono de contacto
+            <input type="tel" name="telefono" autocomplete="tel" placeholder="+54 ...">
+          </label>
+          <label>Mensaje
+            <textarea name="mensaje" placeholder="Contanos qué pieza, descarte o colaboración querés activar"></textarea>
+          </label>
+          <button class="submit" type="submit">Enviar señal</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>© 2026 KHAYEN. Diseño de autor independiente, sustentable y circular.</small>
+    <div class="socials" aria-label="Redes sociales">
+      <a class="social" href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="17.3" cy="6.8" r="1.2" fill="currentColor"/>
+        </svg>
+      </a>
+      <a class="social" href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.6.4-1 1-1Z" fill="currentColor"/>
+        </svg>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("is-visible");
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+    document.querySelectorAll(".process-card, .quote, .cta").forEach((el) => {
+      el.addEventListener("pointermove", (event) => {
+        const box = el.getBoundingClientRect();
+        const x = ((event.clientX - box.left) / box.width) * 100;
+        const y = ((event.clientY - box.top) / box.height) * 100;
+        el.style.backgroundImage = `radial-gradient(circle at ${x}% ${y}%, rgba(245,239,221,.85), transparent 34%), linear-gradient(135deg, var(--verde), var(--ocre), var(--terra))`;
+      });
+      el.addEventListener("pointerleave", () => {
+        el.style.backgroundImage = "";
+      });
+    });
+
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+      link.addEventListener("click", () => {
+        document.getElementById("nav-toggle").checked = false;
+        document.querySelector(".site-header").classList.remove("menu-live");
+      });
+    });
+
+    const navToggle = document.getElementById("nav-toggle");
+    const siteHeader = document.querySelector(".site-header");
+    navToggle.addEventListener("change", () => {
+      siteHeader.classList.toggle("menu-live", navToggle.checked);
+    });
+  </script>
+</body>
+</html>
