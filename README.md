@@ -24,7 +24,6 @@ La propuesta visual se construyó rigurosamente sobre los tonos identitarios de 
 
 El proyecto se estructuró de forma limpia para albergar los diferentes experimentos de maquetación:
 
-```text
 - index.html
 - prompt.html
 - assets/
